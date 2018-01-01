@@ -5,6 +5,7 @@ import java.util.Random;
 import org.joml.Vector3f;
 
 import com.system.TextRenderer;
+import com.system.TheSystem;
 import com.system.image.ImageCache;
 import com.system.ui.unmanaged.MainMenu;
 import com.system.xpreader.XPFile;
@@ -19,12 +20,15 @@ public class MainMenuState extends State {
 	
 	private XPFile logo;
 	
-	public MainMenuState() {
+	private TheSystem system;
+	
+	public MainMenuState(TheSystem system) {
+		this.system = system;
 		this.detail1 = updateDetail(detail1);
 		this.detail2 = updateDetail(detail2);
 		this.detail3 = updateDetail(detail3);
-		this.menu = new MainMenu(22).addItem("Start Jouney", () -> {
-			StateManager.pushState(new PlayerCreateState());
+		this.menu = new MainMenu(22).addItem("Start Journey", () -> {
+			StateManager.pushState(new PlayerCreateState(system));
 		}).addItem("Options", () -> {
 			StateManager.pushState(new OptionsState());
 		}).addItem("Leave", () -> {

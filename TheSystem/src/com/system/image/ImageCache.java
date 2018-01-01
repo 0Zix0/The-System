@@ -13,7 +13,6 @@ public class ImageCache {
 	
 	public static XPFile get(String name) {
 		if(cache.containsKey(name)) {
-			System.out.println("GOT FROM CACHE");
 			return cache.get(name);
 		}
 		try {

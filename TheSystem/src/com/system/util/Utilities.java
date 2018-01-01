@@ -12,4 +12,14 @@ public class Utilities {
 		float b = color.getBlue();
 		return new Vector3f(r / 255, g / 255, b / 255);
 	}
+	
+	public static Vector3f[] convertColors(Color[] colors) {
+		Vector3f[] res = new Vector3f[colors.length];
+		
+		for(int i = 0; i < res.length; i++) {
+			res[i] = convertColor(colors[i]);
+		}
+		
+		return res;
+	}
 }

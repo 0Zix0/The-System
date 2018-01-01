@@ -13,7 +13,7 @@ public class TheSystem extends AbstractGame {
 	
 	public void initialize() {
 		addLayer(new RenderLayer(textRenderer = new TextRenderer(2.0f), new Shader("res/shaders/text.vert", "res/shaders/text.frag")));
-		StateManager.pushState(new MainMenuState());
+		StateManager.pushState(new MainMenuState(this));
 	}
 
 	public void update() {

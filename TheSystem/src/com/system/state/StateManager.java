@@ -23,6 +23,11 @@ public class StateManager {
 		}
 	}
 	
+	public static void setState(State state) {
+		popState();
+		pushState(state);
+	}
+	
 	public static void pushState(State state) {
 		stateQueue.push(state);
 	}

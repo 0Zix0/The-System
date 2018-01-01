@@ -6,22 +6,68 @@ import org.joml.Vector3f;
 
 import com.system.util.Utilities;
 
-public enum Tile {
-
-	WALL1(35, new Color(255, 255, 85)),
-	WALL2(35, new Color(246, 246, 76)),
-	WALL3(35, new Color(239, 239, 59)),
-	WALL4(19, new Color(255, 255, 85)),
-	WALL5(19, new Color(239, 239, 59)),
-
-	BUILDING1('#', new Color(61, 61, 61)),
-	BUILDING2('#', new Color(79, 79, 79)),
-	BUILDING3('#', new Color(40, 40, 40));
+public class Tile {
 	
-	public char c;
-	public Vector3f color;
-	Tile(int c, Color color) {
-		this.c = (char)c;
-		this.color = Utilities.convertColor(color);
+	public static final Tile[] tiles = new Tile[128];
+	
+	static {
+		// YELLOW WALL
+		registerTile(0, new Tile().setSolid(true).setCharacters(new char[] {35, 35, 19}).setColors(TileColor.WALL_COLORS));
+		
+		// GRAY OUTSIDE FLOOR
+		registerTile(1, new Tile().setSolid(false).setCharacters(new char[] {249}).setColors(TileColor.FLOOR_COLORS));
+		
+		// HOUSE WALL
+		registerTile(2, new Tile().setSolid(true).setCharacters(new char[] {'#'}).setColors(TileColor.HOUSE_COLORS));
+		
+		// BROWN INSIDE FLOOR
+		registerTile(3, new Tile().setSolid(false).setCharacters(new char[] {249}).setColors(TileColor.HOUSE_FLOOR_COLORS));
+	}
+	
+	public static void registerTile(int id, Tile tile) {
+		tiles[id] = tile;
+		tiles[id].id = id;
+	}
+	
+	private int id;
+	private char[] chars = new char[] {' '};
+	private Vector3f[] colors = new Vector3f[] {new Vector3f(1.0f)};
+	private boolean solid = true;
+	
+	public Tile setCharacters(char[] chars) {
+		this.chars = chars;
+		return this;
+	}
+
+	public Tile setSolid(boolean solid) {
+		this.solid = solid;
+		return this;
+	}
+
+	public Tile setColors(Vector3f[] colors) {
+		this.colors = colors;
+		return this;
+	}
+	
+
+	public Tile setColors(Color[] colors) {
+		this.colors = Utilities.convertColors(colors);
+		return this;
+	}
+	
+	public Vector3f[] getColors() {
+		return colors;
+	}
+	
+	public char[] getCharacters() {
+		return chars;
+	}
+	
+	public boolean isSolid() {
+		return solid;
+	}
+	
+	public int getID() {
+		return id;
 	}
 }

@@ -3,7 +3,6 @@ package com.system.ui;
 import org.joml.Vector3f;
 import org.lwjgl.glfw.GLFW;
 
-import com.system.ColorPalette;
 import com.system.TextRenderer;
 import com.zengine.Input;
 
