@@ -9,21 +9,26 @@ import com.zengine.graphics.Renderer;
 
 public class TextRenderer extends Renderer {
 	
-	private static final float SPRITE_WIDTH = 8.0f;
-	private static final float SPRITE_HEIGHT = 8.0f;
-	
 	private TextBatch batchRenderer;
 	private Spritesheet spritesheet;
 	
 	private float pixelHeight, pixelWidth;
 	private float charWidth, charHeight;
 	private float scale;
+
+	//private static final float SPRITE_WIDTH = 8.0f;
+	//private static final float SPRITE_HEIGHT = 8.0f;
+	
+	private static float SPRITE_WIDTH = 8.0f;
+	private static float SPRITE_HEIGHT = 8.0f;
 	
 	public TextRenderer(float scale) {
 		this.batchRenderer = new TextBatch(spritesheet = new Spritesheet("res/sprites/cp437_8x8.png"));
 		this.pixelWidth = 2.0f / Display.getWidth();
 		this.pixelHeight = 2.0f / Display.getHeight();
 		this.scale = scale;
+		this.SPRITE_WIDTH = spritesheet.getWidth() / 16;
+		this.SPRITE_HEIGHT = spritesheet.getHeight() / 16;
 		this.charWidth = SPRITE_WIDTH * pixelWidth * scale;
 		this.charHeight = SPRITE_HEIGHT * pixelHeight * scale;
 	}

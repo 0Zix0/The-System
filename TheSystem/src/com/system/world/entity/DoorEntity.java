@@ -2,6 +2,7 @@ package com.system.world.entity;
 
 import java.awt.Color;
 
+import com.system.world.Player;
 import com.system.world.TileColor;
 
 public class DoorEntity extends Entity {
@@ -11,7 +12,7 @@ public class DoorEntity extends Entity {
 	
 	private boolean open = false;
 	
-	public boolean onMoveInto() {
+	public boolean onMoveInto(Player player) {
 		if(!open) {
 			open = true;
 			return false;
@@ -19,7 +20,7 @@ public class DoorEntity extends Entity {
 		return true;
 	}
 	
-	public void onMoveOff() {
+	public void onMoveOff(Player player) {
 		open = false;
 	}
 

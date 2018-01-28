@@ -7,7 +7,9 @@ import java.util.Random;
 
 import javax.imageio.ImageIO;
 
+import com.system.image.ImageCache;
 import com.system.world.Tile;
+import com.system.xpreader.XPFile;
 
 public class MapLoader {
 	
@@ -21,34 +23,44 @@ public class MapLoader {
 	private static void addColor(int color, int id) {
 		COLOR_LOOKUP.put(color, id);
 	}
-
+	
 	//TODO: remove the requirement for 80x45 maps, man up and implement scrolling
-	public static Map load(String file) {
+	public static WorldMap loadWorld(String map, String ceilingMap) {
 		try {
-			BufferedImage image = ImageIO.read(new File(file));
-			int width = image.getWidth();
-			int height = image.getHeight();
+			BufferedImage mapImage = ImageIO.read(new File(map));
+			BufferedImage ceilingImage = ImageIO.read(new File(ceilingMap));
+			int width = mapImage.getWidth();
+			int height = mapImage.getHeight();
 			if(width != 80 || height != 45) {
 				System.out.println("Map is not the right size");
+				return null;
+			}
+			if(ceilingImage.getWidth() != width || ceilingImage.getHeight() != height) {
+				System.out.println("Ceiling map is not same size as tile map.");
 				return null;
 			}
 			
 			Tile[] tiles = new Tile[width * height];
 			int[] colors = new int[width * height];
 			int[] chars = new int[width * height];
+			int[] ceilings = new int[width * height];
 			
 			Random random = new Random();
 			
 			for(int y = 0; y < height; y++) {
 				for(int x = 0; x < width; x++) {
-					int id = COLOR_LOOKUP.get(image.getRGB(x, y));
+					int id = COLOR_LOOKUP.get(mapImage.getRGB(x, y));
 					tiles[x + y * width] = Tile.tiles[id];
 					colors[x + y * width] = random.nextInt(Tile.tiles[id].getColors().length);
 					chars[x + y * width] = random.nextInt(Tile.tiles[id].getCharacters().length);
+					int ceilingColor = ceilingImage.getRGB(x, y);
+					if(ceilingColor != 0xFFFFFFFF) {
+						ceilings[x + y * width] = ceilingColor;
+					}
 				}
 			}
 			
-			return new Map(width, height, tiles, colors, chars);
+			return new WorldMap(width, height, tiles, colors, chars, ceilings);
 			
 		} catch(Exception e) {
 			e.printStackTrace();

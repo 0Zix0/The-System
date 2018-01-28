@@ -35,4 +35,12 @@ public class Spritesheet {
 		
 		return new Vector4f(xMin, yMin, xMax, yMax);
 	}
+
+	public int getWidth() {
+		return texture.getWidth();
+	}
+	
+	public int getHeight() {
+		return texture.getHeight();
+	}
 }

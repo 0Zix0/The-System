@@ -9,7 +9,6 @@ import com.system.util.Utilities;
 public class Tile {
 	
 	public static final Tile[] tiles = new Tile[128];
-	
 	static {
 		// YELLOW WALL
 		registerTile(0, new Tile().setSolid(true).setCharacters(new char[] {35, 35, 19}).setColors(TileColor.WALL_COLORS));

@@ -5,6 +5,7 @@ import java.util.HashMap;
 import org.joml.Vector2i;
 import org.joml.Vector3f;
 
+import com.system.world.Player;
 import com.system.world.TileColor;
 
 public abstract class Entity {
@@ -14,6 +15,9 @@ public abstract class Entity {
 	
 	static {
 		registerEntity(0, DoorEntity.class);
+		registerEntity(1, BankEntity.class);
+		registerEntity(2, ShipPanelEntity.class);
+		registerEntity(3, ShipInventoryEntity.class);
 	}
 	
 	public static void registerEntity(int id, Class<? extends Entity> entity) {
@@ -55,8 +59,8 @@ public abstract class Entity {
 	public abstract TileColor getColor();
 	public abstract String getName();
 	
-	public boolean onMoveInto() { return true; }
-	public void onMoveOff() {}
+	public boolean onMoveInto(Player player) { return true; }
+	public void onMoveOff(Player player) {}
 	
 	public Vector2i getPosition() {
 		return position;

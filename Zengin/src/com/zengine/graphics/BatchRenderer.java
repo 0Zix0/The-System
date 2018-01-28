@@ -62,7 +62,7 @@ public class BatchRenderer extends Renderer {
 				
 		OpenGL.bindVertexArray(0);
 	}
-	
+
 	public void submit(Vector3f pos, Vector2f size, Vector4f texCoords) {
 		data.putFloat(pos.x);
 		data.putFloat(pos.y);

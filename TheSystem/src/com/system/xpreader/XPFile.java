@@ -23,7 +23,7 @@ public class XPFile {
             return;
         layers.get(0).render(renderer, x, y);
     }
-
+    
     public XPLayer layer(int i)
     {
         return layers.get(i);

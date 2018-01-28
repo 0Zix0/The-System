@@ -7,8 +7,10 @@ import com.system.TheSystem;
 import com.system.state.State;
 import com.system.world.Player;
 import com.system.world.entity.Entity;
+import com.system.world.map.WorldMap;
 import com.system.world.map.Map;
 import com.system.world.map.MapLoader;
+import com.system.world.map.ShipMap;
 
 public class GameState extends State {
 
@@ -17,10 +19,10 @@ public class GameState extends State {
 	private TheSystem system;
 	
 	public GameState(Player player, TheSystem system) {
-		this.map = MapLoader.load("res/maps/test.png");
-		this.map.addEntity(24, 13, Entity.create(0));
-		this.map.addEntity(21, 16, Entity.create(0));
-		this.map.addEntity(27, 16, Entity.create(0));
+		//this.map = MapLoader.loadWorld("res/maps/test.png", "res/maps/ceilings.png");
+		this.map = new ShipMap();
+		this.map.addEntity(39, 16, Entity.create(1));
+		this.map.addEntity(40, 16, Entity.create(1));
 		this.player = player;
 		this.player.setMap(map);
 		this.system = system;
