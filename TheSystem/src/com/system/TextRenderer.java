@@ -41,6 +41,27 @@ public class TextRenderer extends Renderer {
 		text(c + "", cx, cy, foreground, background);
 	}
 	
+	public void box(char c, int xp, int yp, int width, int height, Vector3f foreground) {
+		for(int i = 0; i < width; i++) {
+			text(c, xp + i, yp, foreground, new Vector3f());
+			text(c, xp + i, yp + height, foreground, new Vector3f());
+		}
+		for(int i = 0; i < height + 1; i++) {
+			text(c, xp, yp + i, foreground, new Vector3f());
+			text(c, xp + width, yp + i, foreground, new Vector3f());
+		}
+	}
+
+	public void fill(char c, int xp, int yp, int width, int height, Vector3f foreground) {
+		String s = "";
+		for(int i = 0; i <= width; i++) {
+			s += c;
+		}
+		for(int i = 0; i <= height; i++) {
+			text(s, xp, yp + i, foreground, new Vector3f());
+		}
+	}
+	
 	public void text(String str, int cx, int cy, Vector3f foreground, Vector3f background) {
 		Vector2f pos = getNDC(cx * SPRITE_WIDTH * scale, cy * SPRITE_HEIGHT * scale);
 		pos.y -= charHeight;

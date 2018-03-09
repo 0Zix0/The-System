@@ -37,8 +37,9 @@ public class TheSystem extends AbstractGame {
 		settings.title = "The System";
 		int tileWidth = 8;
 		int tileHeight = 8;
-		settings.width = (1280 / tileWidth) * tileWidth;
-		settings.height = (720 / tileHeight) * tileHeight;
+		int i = 1;
+		settings.width = ((1280/i) / tileWidth) * tileWidth;
+		settings.height = ((720/i) / tileHeight) * tileHeight;
 		game.start(settings);
 	}
 }
